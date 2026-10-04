@@ -84,7 +84,28 @@ The vulnerability was identified through a combination of directory enumeration 
 * **Confirmation:** By injecting directory traversal sequences (`../`), the application failed to restrict file access to the intended directory, allowing us to traverse outside the web root and confirm the ability to read sensitive system files and backup artifacts.
 
 **Proof of Compromise
-**<img width="1073" height="812" alt="Screenshot From 2026-10-02 21-29-28" src="https://github.com/user-attachments/assets/134503f5-4785-46da-b11f-abdac097218e" />
+
+**
+<img width="1073" height="812" alt="Screenshot From 2026-10-02 21-29-28" src="https://github.com/user-attachments/assets/134503f5-4785-46da-b11f-abdac097218e" />
+
+** Key Takeaways**
+
+The Quick Recovery challenge highlights critical security lessons regarding web application design, backup hygiene, and access controls:
+
+Secure Backup Handling: Never store sensitive backup archives (.zip, .bak, .old) within the public web root or in predictable, unindexed directories where automated directory fuzzers can easily discover them.
+
+Strict Input Validation & Sanitization: Implement rigorous allow-listing or sanitization for any file-fetching parameters to prevent directory traversal (../) attacks from breaching application boundaries.
+
+Principle of Least Privilege: Ensure that the web server user account runs with minimal permissions, preventing unauthorized access to sensitive system files or restricted backend directories even if a traversal flaw exists.
+
+**
+CONCLUSION**
+
+
+The Quick Recovery challenge served as an excellent practical exercise in web enumeration, path traversal exploitation, and artifact extraction. By systematically fuzzing for hidden paths, identifying improper input validation, and successfully extracting and analyzing the underlying backup archive, we were able to navigate the target constraints and retrieve the flag.
+
+This challenge reinforces the critical importance of secure file-handling practices and strict perimeter defenses in modern web applications.
+
 
 
 
