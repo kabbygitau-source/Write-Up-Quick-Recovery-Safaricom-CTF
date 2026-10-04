@@ -73,6 +73,21 @@ Unpack the recovered archive to inspect application source code or hidden keys
 unzip recovery.zip
 
 
+**Vulnerability Discovery
+**
+The vulnerability was identified through a combination of directory enumeration and endpoint inspection:
+
+* **Exposed Attack Surface:** Initial fuzzing via Gobuster revealed unindexed paths and forgotten file extensions left in the web root.
+* 
+* **Parameter Testing:** Further testing of the application's file-fetching functionality exposed a lack of strict input sanitization.
+* 
+* **Confirmation:** By injecting directory traversal sequences (`../`), the application failed to restrict file access to the intended directory, allowing us to traverse outside the web root and confirm the ability to read sensitive system files and backup artifacts.
+
+**Proof of Compromise
+**<img width="1073" height="812" alt="Screenshot From 2026-10-02 21-29-28" src="https://github.com/user-attachments/assets/134503f5-4785-46da-b11f-abdac097218e" />
+
+
+
 
 
 
